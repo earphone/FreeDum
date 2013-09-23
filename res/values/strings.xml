@@ -4,5 +4,9 @@
     <string name="app_name">FreeDum</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="Day">Day</string>
+    <string name="List">List</string>
+    <string name="Month">Month</string>
+    <string name="New">New Event</string>
 
 </resources>

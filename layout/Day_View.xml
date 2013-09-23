@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+
+    <Button
+        android:id="@+id/List"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Month"
+        android:layout_alignLeft="@+id/New"
+        android:minHeight="36dp"
+        android:minWidth="48dp"
+        android:text="@string/List"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/Month"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="22dp"
+        android:minHeight="36dp"
+        android:minWidth="70dp"
+        android:text="Month"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/New"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/List"
+        android:layout_alignBottom="@+id/List"
+        android:layout_centerHorizontal="true"
+        android:minHeight="36dp"
+        android:minWidth="48dp"
+        android:text="New Event"
+        tools:ignore="HardcodedText" />
+
+</RelativeLayout>
