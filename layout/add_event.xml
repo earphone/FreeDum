@@ -6,7 +6,7 @@
     android:paddingRight="16dp" >
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/event_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="@string/event_name" />
@@ -15,19 +15,19 @@
         android:id="@+id/datePicker1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/name"
-        android:layout_below="@+id/name"
+        android:layout_alignLeft="@+id/event_name"
+        android:layout_below="@+id/event_name"
         android:layout_marginTop="18dp" />
 
     <TimePicker
         android:id="@+id/TimePicker01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_alignLeft="@+id/button1" />
+        android:layout_above="@+id/Add_Friend"
+        android:layout_alignLeft="@+id/Add_Friend" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/Add_Friend"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/timePicker1"
@@ -35,15 +35,15 @@
         android:text="Add Friends" />
 
     <Button
-        android:id="@+id/Button01"
+        android:id="@+id/Send"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/name"
+        android:layout_alignRight="@+id/event_name"
         android:layout_below="@+id/TimePicker01"
         android:text="Send" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/End"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/TimePicker01"
@@ -55,7 +55,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/EditText01"
+        android:id="@+id/Start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/datePicker1"
@@ -67,7 +67,7 @@
         android:id="@+id/timePicker1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/EditText01"
-        android:layout_below="@+id/EditText01" />
+        android:layout_alignLeft="@+id/Start"
+        android:layout_below="@+id/Start" />
 
 </RelativeLayout>

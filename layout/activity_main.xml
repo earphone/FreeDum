@@ -7,7 +7,7 @@
     android:paddingRight="16dp" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/New"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -18,34 +18,34 @@
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/Day"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button2"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_toRightOf="@+id/button2"
+        android:layout_alignBaseline="@+id/List"
+        android:layout_alignBottom="@+id/List"
+        android:layout_toRightOf="@+id/List"
         android:minHeight="36dp"
         android:minWidth="48dp"
         android:text="Day"
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/List"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_toRightOf="@+id/button1"
+        android:layout_alignBaseline="@+id/New"
+        android:layout_alignBottom="@+id/New"
+        android:layout_toRightOf="@+id/New"
         android:minHeight="36dp"
         android:minWidth="48dp"
         android:text="List"
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/Button01"
+        android:id="@+id/Settings"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
+        android:layout_alignLeft="@+id/New"
         android:layout_alignParentTop="true"
         android:minHeight="36dp"
         android:minWidth="48dp"
@@ -56,11 +56,11 @@
         android:id="@+id/calendarView1"
         android:layout_width="match_parent"
         android:layout_height="370dp"
-        android:layout_alignLeft="@+id/Button01"
-        android:layout_below="@+id/Button01" />
+        android:layout_alignLeft="@+id/Settings"
+        android:layout_below="@+id/Settings" />
 
     <Button
-        android:id="@+id/Button02"
+        android:id="@+id/Send"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/calendarView1"
@@ -71,14 +71,13 @@
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/Button03"
+        android:id="@+id/Month"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button3"
-        android:layout_alignBottom="@+id/button3"
-        android:layout_alignRight="@+id/calendarView1"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/Day"
         android:minHeight="36dp"
-        android:minWidth="5dp"
+        android:minWidth="70dp"
         android:text="Month"
         tools:ignore="HardcodedText" />
 
