@@ -8,5 +8,15 @@
     <string name="List">List</string>
     <string name="Month">Month</string>
     <string name="New">New Event</string>
+    <string name="title_activity_sign_up">Sign Up</string>
+    <string name="title_activity_login">FreeDUM</string>
+    <string name="title_activity_new_event">New Event</string>
+    <string name="title_activity_month">Month</string>
+    <string name="title_activity_list">List</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="password_forgot">Forgot Your Password?</string>
+    <string name="login_button">LOGIN</string>
+    <string name="signup_button">Not a member?\nClick here to sign up!!!</string>
 
 </resources>

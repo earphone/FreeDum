@@ -7,7 +7,20 @@ This is a social free time collaboration app for the Android OS.
 
 Update Logs will be posted here
 
-Sept 22, 2013: Brenden Takai
+Oct 1, 2013:	Brandon Higashi
+	Created activities for the following:
+		List
+		Login
+		Month
+		New Event
+		Sign Up
+	If there were any layouts already created for the aforementioned
+		activities in FreeDum/layout, they were moved into 
+		FreeDum/res/layout and renamed to reflect the created activity.
+	Used basic template from https://github.com/earphone/AndroidTest/App/
+		blob/master/res/layout/login.xml for layout of login:
+		FreeDum/res/layout/activity_login.xml
+Sept 22, 2013: 	Brenden Takai
 	Updated Layouts - Added day, list, month view layouts.
 
 July 06, 2013:	Brandon Higashi

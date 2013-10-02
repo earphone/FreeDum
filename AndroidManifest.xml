@@ -22,5 +22,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="bb.sxytm.freedum.SignUpActivity"
+            android:label="@string/title_activity_sign_up" >
+        </activity>
+        <activity
+            android:name="bb.sxytm.freedum.LoginActivity"
+            android:label="@string/title_activity_login" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="bb.sxytm.freedum.NewEventActivity"
+            android:label="@string/title_activity_new_event" >
+        </activity>
+        <activity
+            android:name="bb.sxytm.freedum.MonthActivity"
+            android:label="@string/title_activity_month" >
+        </activity>
+        <activity
+            android:name="bb.sxytm.freedum.ListActivity"
+            android:label="@string/title_activity_list" >
+        </activity>
     </application>
+
 </manifest>
