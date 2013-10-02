@@ -20,6 +20,13 @@ Oct 1, 2013:	Brandon Higashi
 	Used basic template from https://github.com/earphone/AndroidTest/App/
 		blob/master/res/layout/login.xml for layout of login:
 		FreeDum/res/layout/activity_login.xml
+	Imported Parse-1.3.5 into FreeDum/libs
+	Set up initializtion of Parse in LoginActivity
+	Set LogingActivity as launcher activity
+	Implemented Parse login and sign up in LoginActivity and SignUpActivity
+		but currently signup does not check for empty fields and lets
+		them through.
+
 Sept 22, 2013: 	Brenden Takai
 	Updated Layouts - Added day, list, month view layouts.
 

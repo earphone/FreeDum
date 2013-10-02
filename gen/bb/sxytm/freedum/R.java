@@ -24,13 +24,22 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int RelativeLayout1=0x7f080000;
-        public static final int action_settings=0x7f080006;
-        public static final int button_login=0x7f080005;
-        public static final int forgot_password=0x7f080004;
-        public static final int passwordLogin=0x7f080002;
-        public static final int signUp=0x7f080003;
-        public static final int usernameLogin=0x7f080001;
+        public static final int RelativeLayout1=0x7f080002;
+        public static final int action_settings=0x7f08000f;
+        public static final int button_login=0x7f080007;
+        public static final int forgot_password=0x7f080006;
+        public static final int listMonthView=0x7f080001;
+        public static final int listNewEvent=0x7f080000;
+        public static final int monthListView=0x7f080009;
+        public static final int monthNewEvent=0x7f080008;
+        public static final int passwordLogin=0x7f080004;
+        public static final int signUp=0x7f080005;
+        public static final int signupEmail=0x7f08000d;
+        public static final int signupFinishButton=0x7f08000b;
+        public static final int signupName=0x7f08000c;
+        public static final int signupPassword=0x7f08000e;
+        public static final int signupUsername=0x7f08000a;
+        public static final int usernameLogin=0x7f080003;
     }
     public static final class layout {
         public static final int activity_list=0x7f030000;
@@ -55,11 +64,17 @@ public final class R {
         public static final int New=0x7f050006;
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
+        public static final int email_hint=0x7f050015;
         public static final int hello_world=0x7f050002;
+        public static final int list_view_button=0x7f050013;
         public static final int login_button=0x7f05000f;
+        public static final int month_view_button=0x7f050012;
+        public static final int name_hint=0x7f050014;
+        public static final int new_event_button=0x7f050011;
         public static final int password_forgot=0x7f05000e;
         public static final int password_hint=0x7f05000d;
         public static final int signup_button=0x7f050010;
+        public static final int signup_done_button=0x7f050016;
         public static final int title_activity_list=0x7f05000b;
         public static final int title_activity_login=0x7f050008;
         public static final int title_activity_month=0x7f05000a;

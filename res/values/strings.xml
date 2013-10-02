@@ -18,5 +18,11 @@
     <string name="password_forgot">Forgot Your Password?</string>
     <string name="login_button">LOGIN</string>
     <string name="signup_button">Not a member?\nClick here to sign up!!!</string>
+    <string name="new_event_button">New Event</string>
+    <string name="month_view_button">Month View</string>
+    <string name="list_view_button">List View</string>
+    <string name="name_hint">Name</string>
+    <string name="email_hint">Email</string>
+    <string name="signup_done_button">Done</string>
 
 </resources>

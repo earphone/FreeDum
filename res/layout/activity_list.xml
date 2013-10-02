@@ -1,16 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ListActivity" >
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
 
-    <TextView
+    <Button
+        android:id="@+id/listNewEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignBaseline="@+id/listMonthView"
+        android:layout_alignBottom="@+id/listMonthView"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="22dp"
+        android:minHeight="36dp"
+        android:minWidth="48dp"
+        android:text="@string/new_event_button"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/listMonthView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="25dp"
+        android:minHeight="36dp"
+        android:minWidth="70dp"
+        android:text="@string/month_view_button"
+        tools:ignore="HardcodedText" />
 
 </RelativeLayout>
