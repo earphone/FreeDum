@@ -24,5 +24,6 @@
     <string name="name_hint">Name</string>
     <string name="email_hint">Email</string>
     <string name="signup_done_button">Done</string>
+    <string name="logout_button">LOGOUT</string>
 
 </resources>

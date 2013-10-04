@@ -7,6 +7,17 @@ This is a social free time collaboration app for the Android OS.
 
 Update Logs will be posted here
 
+Oct 4, 2013:	Brandon Higashi
+	Linked the main buttons in the Month and List Activities
+		Launching Month from List or List from Month closes the
+		previous Activity. Therefore, pressing the back button closes
+		the application.
+		Launching NewEvent from List or Month keeps the previous
+		Activity open. Therefore, pressing the back button is the same
+		as canceling creating a new event.
+	Added a logout button in the Action-bar of Month and List Activities
+		Sends user to login page
+
 Oct 1, 2013:	Brandon Higashi
 	Created activities for the following:
 		List

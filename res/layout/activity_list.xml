@@ -17,6 +17,7 @@
         android:minHeight="36dp"
         android:minWidth="48dp"
         android:text="@string/new_event_button"
+        android:onClick="newEvent"
         tools:ignore="HardcodedText" />
 
     <Button
@@ -30,6 +31,7 @@
         android:minHeight="36dp"
         android:minWidth="70dp"
         android:text="@string/month_view_button"
+        android:onClick="monthView"
         tools:ignore="HardcodedText" />
 
 </RelativeLayout>
