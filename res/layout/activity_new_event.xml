@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".NewEventActivity" >
+    tools:context=".NewEventActivity" 
+    android:background="@drawable/thirty_three_degree">
 
     <Button
         android:id="@+id/newSaveButton"
@@ -15,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginRight="32dp"
+        android:background="#E3E3E3"
         android:text="@string/save_button" />
 
     <Button
@@ -26,6 +28,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="34dp"
         android:text="@string/cancel_button"
+        android:background="#E3E3E3"
         android:onClick="cancel" />
 
     <ScrollView
@@ -58,6 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/from_help"
+                android:background="#FFFFFF"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <EditText
@@ -91,6 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/to_help"
+                android:background="#FFFFFF"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <EditText

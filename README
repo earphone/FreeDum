@@ -7,6 +7,11 @@ This is a social free time collaboration app for the Android OS.
 
 Update Logs will be posted here
 
+Oct 17, 2013:	Brandon Higashi
+	Added backgrounds created by Brended for all layouts except login.
+	Changed backgrounds for help text and cancel and save buttons to
+		compensate for the opacity by default.
+
 Oct 16, 2013:	Brandon Higashi
 	Added Date and Time picker fragment files
 	Created and implemented a temporary layout for the new event activity.
