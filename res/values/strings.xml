@@ -25,5 +25,12 @@
     <string name="email_hint">Email</string>
     <string name="signup_done_button">Done</string>
     <string name="logout_button">LOGOUT</string>
+    <string name="cancel_button">X  Cancel</string>
+    <string name="save_button">√   Save</string>
+    <string name="event_name">Event Name</string>
+    <string name="from_help">FROM</string>
+    <string name="date_hint">Date</string>
+    <string name="to_help">TO</string>
+    <string name="time_hint">Time</string>
 
 </resources>

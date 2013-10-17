@@ -7,6 +7,19 @@ This is a social free time collaboration app for the Android OS.
 
 Update Logs will be posted here
 
+Oct 16, 2013:	Brandon Higashi
+	Added Date and Time picker fragment files
+	Created and implemented a temporary layout for the new event activity.
+		Cancel button closes and sends user back to last view
+		Followed similar layout and style of default holo theme calendar
+		Clicking on the Date or Time launches Date and Time pickers
+		respectively. Setting them is not implemented yet.
+		Also, Save button is not implemented.
+	In New Event activity added method for showing time and date pickers 
+	Side Note:	Considering moving new event and view buttons in List
+		and Month activities into the action bar so the views can be
+		full screen.
+
 Oct 4, 2013:	Brandon Higashi
 	Linked the main buttons in the Month and List Activities
 		Launching Month from List or List from Month closes the
