@@ -5,10 +5,20 @@
 
 This is a social free time collaboration app for the Android OS.
 
+ToDO:	Figure out how to change save data and time from within pickers.
+	Check for internet when starting up app.
+	Stop background from scrunching up when keyboard pops up.
+	Save input when pressing ENTER.
+
 Update Logs will be posted here
 
+Oct 27, 2013:	Brandon Higashi
+	Split Time and Date picker fragment files into From and To Date and Time		Fragments to allow for individual setting of each.
+	On creation of NewEventActivity, inputs current time and date in fields.
+		
+
 Oct 17, 2013:	Brandon Higashi
-	Added backgrounds created by Brended for all layouts except login.
+	Added backgrounds created by Brenden for all layouts except login.
 	Changed backgrounds for help text and cancel and save buttons to
 		compensate for the opacity by default.
 

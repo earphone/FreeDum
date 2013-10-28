@@ -17,6 +17,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="32dp"
         android:background="#E3E3E3"
+        android:onClick="save"
         android:text="@string/save_button" />
 
     <Button
@@ -70,12 +71,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:editable="false"
+                android:editable="true"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:hint="@string/date_hint"
-                android:onClick="showDatePicker" />
+                android:freezesText="true"
+                android:onClick="showFromDatePicker" />
 
             <EditText
                 android:id="@+id/newEventFromTime"
@@ -83,12 +85,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:editable="false"
+                android:editable="true"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:hint="@string/time_hint"
-                android:onClick="showTimePicker" />
+                android:onClick="showFromTimePicker" />
 
             <TextView
                 android:id="@+id/newEventToHelp"
@@ -104,12 +106,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:editable="false"
+                android:editable="true"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:hint="@string/date_hint"
-                android:onClick="showDatePicker" />
+                android:onClick="showToDatePicker" />
 
             <EditText
                 android:id="@+id/newEventToTime"
@@ -117,12 +119,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:editable="false"
+                android:editable="true"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:hint="@string/time_hint"
-                android:onClick="showTimePicker" />
+                android:onClick="showToTimePicker" />
         </LinearLayout>
     </ScrollView>
 
