@@ -5,12 +5,19 @@
 
 This is a social free time collaboration app for the Android OS.
 
-ToDO:	Figure out how to change save data and time from within pickers.
+ToDO:	
+	Save dates and times to Parse.
 	Check for internet when starting up app.
 	Stop background from scrunching up when keyboard pops up.
 	Save input when pressing ENTER.
 
 Update Logs will be posted here
+
+Oct 29, 2013:	Brandon Higashi
+	Removed ALL Time and Date Picker Fragments to save space.
+		Moved and modified methods so they all work inside of
+		NewEventActivity. Appropriate changes were made to XML as well.
+		Picking a date or time now shows the selected time.
 
 Oct 27, 2013:	Brandon Higashi
 	Split Time and Date picker fragment files into From and To Date and Time		Fragments to allow for individual setting of each.
