@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".NewEventActivity" 
-    android:background="@drawable/thirty_three_degree">
+    android:background="@drawable/fourty_five_degree">
 
     <Button
         android:id="@+id/newSaveButton"

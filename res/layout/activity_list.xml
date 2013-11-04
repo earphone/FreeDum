@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp" 
-    android:background="@drawable/eleven_degree">
+    android:background="@drawable/twenty_two_degree">
 
     <Button
         android:id="@+id/listNewEvent"
