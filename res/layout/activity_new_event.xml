@@ -17,7 +17,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="32dp"
         android:background="#E3E3E3"
-        android:onClick="save"
+        android:onClick="saveEvent"
         android:text="@string/save_button" />
 
     <Button

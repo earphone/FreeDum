@@ -88,6 +88,7 @@ public class LoginActivity extends Activity {
 		// Go from login page to sign up page
 		Intent intent = new Intent(this, SignUpActivity.class);
 		startActivity(intent);
+		finish();
 	} // end of loginSignup
 	
 }

@@ -2,12 +2,17 @@ package bb.sxytm.freedum;
 
 import java.util.Calendar;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.DatePicker;
@@ -16,12 +21,16 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.parse.ParseUser;
+
 public class NewEventActivity extends Activity {
 		int hour,min,day,month,year;
 		static final int TIME_DIALOG_ID = 0;
 		static final int DATE_DIALOG_ID = 1;
-		static boolean TO_FROM_TIME = true;
-		static boolean TO_FROM_DATE = true;
+		static boolean TO_FROM_TIME = true;		// true if toTime
+		static boolean TO_FROM_DATE = true;		// true if toDate
+		static String startDay = "";
+		static String startMonth = "";
 		
 		// OnCreate sets the dates and times to current
 	    @Override
@@ -95,7 +104,11 @@ public class NewEventActivity extends Activity {
 				year = mYear;
 				month = monthOfYear;
 				day = dayOfMonth;
-				if(TO_FROM_DATE) et = (EditText)findViewById(R.id.newEventFromDate);
+				if(TO_FROM_DATE) {
+					et = (EditText)findViewById(R.id.newEventFromDate);
+					startMonth = month + "_" + year;
+					startDay = day + "_" + month + "_" + year;
+				}
 				else et = (EditText)findViewById(R.id.newEventToDate);
 				et.setText((month+1) + "/" + day + "/" + year);
 			}
@@ -121,12 +134,55 @@ public class NewEventActivity extends Activity {
 		}
 		
 		// Saves the current event to Parse
-		public void save(View v) {
-			Context context = getApplicationContext();
-			TextView etext = (TextView)findViewById(R.id.newEventFromDate);
-			CharSequence text = etext.getText();
-			int duration = Toast.LENGTH_LONG;
-			Toast.makeText(context, text, duration).show();
+		public void saveEvent(View v) throws JSONException {
+		//	Context context = getApplicationContext();
+		//	TextView etext = (TextView)findViewById(R.id.newEventFromDate);
+		//	CharSequence text = etext.getText();
+		//	int duration = Toast.LENGTH_LONG;
+		//	Toast.makeText(context, text, duration).show();
+			
+			// Get current user and save to day_month_year data in month_year
+			ParseUser currentUser = ParseUser.getCurrentUser();
+			Context errorContext = getApplicationContext();
+			CharSequence doneText = "Saving . . .";
+			int duration = Toast.LENGTH_SHORT;
+			Toast.makeText(errorContext, doneText, duration).show();
+			if(currentUser == null) {
+				CharSequence errorText = "You are not signed in!! Nothing saved and sending to Login!!";
+				int errorDuration = Toast.LENGTH_LONG;
+				Toast.makeText(errorContext, errorText, errorDuration).show();
+				Intent intent = new Intent(this, LoginActivity.class);
+	        	startActivity(intent);
+	        	finish();
+			}
+			else {
+					// Save all event information in a JSON array
+					JSONObject event = new JSONObject();
+					TextView etext = (TextView)findViewById(R.id.newEventName);
+					CharSequence text = etext.getText();
+					Log.d("TEXT", text.toString());
+					event.put("name",text.toString());
+					etext = (TextView)findViewById(R.id.newEventFromDate);
+					text = etext.getText();
+					event.put("fromDate",text.toString());
+					etext = (TextView)findViewById(R.id.newEventToDate);
+					text = etext.getText();
+					event.put("toDate",text.toString());
+					etext = (TextView)findViewById(R.id.newEventFromTime);
+					text = etext.getText();
+					event.put("fromDate",text.toString());
+					etext = (TextView)findViewById(R.id.newEventToTime);
+					text = etext.getText();
+					event.put("toTime",text.toString());
+					currentUser.put(startMonth, startDay);
+					currentUser.put(startDay, event);
+					currentUser.saveEventually();
+					doneText = "Congratulations!! Saved: " + startDay;
+					duration = Toast.LENGTH_LONG;
+					Toast.makeText(errorContext, doneText, duration).show();
+					finish();
+			}
+			
 		}
 		
         @Override
