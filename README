@@ -13,6 +13,11 @@ ToDO:
 
 Update Logs will be posted here
 
+Nov 03, 2013:   Brenden Takai
+	Uploaded Revised Layouts.
+		Working on ListActivity.
+		Also need to fix background scrunching.
+
 Oct 29, 2013:	Brandon Higashi
 	Removed ALL Time and Date Picker Fragments to save space.
 		Moved and modified methods so they all work inside of

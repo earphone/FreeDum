@@ -28,7 +28,8 @@ public final class R {
         public static final int seventy_eight_degree=0x7f020004;
         public static final int sixty_seven_degree=0x7f020005;
         public static final int thirty_three_degree=0x7f020006;
-        public static final int zero_degree=0x7f020007;
+        public static final int twenty_two_degree=0x7f020007;
+        public static final int zero_degree=0x7f020008;
     }
     public static final class id {
         public static final int Logout=0x7f08001a;
