@@ -6,12 +6,25 @@
 This is a social free time collaboration app for the Android OS.
 
 ToDO:	
-	Save dates and times to Parse.
 	Check for internet when starting up app.
 	Stop background from scrunching up when keyboard pops up.
 	Save input when pressing ENTER.
 
 Update Logs will be posted here
+
+Nov 06, 2013:	Brandon Higashi
+	Fixed Layout sizes so they are now 2048 or less
+	Save button now saves new events
+		Month__Year contains all days events occur on for reference
+		Month_Day_Year contains all events on that day
+		Data for an event is saved in a JSONObject with the fields:
+			name
+			fromDate
+			toDate
+			fromTime
+			toTime
+	Added initialize Parse to MonthActivity in case they did not close the
+		app before
 
 Nov 03, 2013:   Brenden Takai
 	Uploaded Revised Layouts.

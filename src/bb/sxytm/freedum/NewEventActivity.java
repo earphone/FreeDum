@@ -1,6 +1,7 @@
 package bb.sxytm.freedum;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,8 +30,10 @@ public class NewEventActivity extends Activity {
 		static final int DATE_DIALOG_ID = 1;
 		static boolean TO_FROM_TIME = true;		// true if toTime
 		static boolean TO_FROM_DATE = true;		// true if toDate
-		static String startDay = "";
-		static String startMonth = "";
+		String startDay = "";
+		String startMonth = "";
+		public static final String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+
 		
 		// OnCreate sets the dates and times to current
 	    @Override
@@ -53,6 +56,8 @@ public class NewEventActivity extends Activity {
 	  	  	FromTimeEdit.setText(text);
 	  	    EditText ToTimeEdit = (EditText) findViewById(R.id.newEventToTime);
 		  	ToTimeEdit.setText(text);
+		  	startMonth = months[month] + "_" + String.valueOf(year);
+			startDay = months[month] + "_" +String.valueOf(day) + "_" +  String.valueOf(year);
 
 	    }
 	    
@@ -106,8 +111,10 @@ public class NewEventActivity extends Activity {
 				day = dayOfMonth;
 				if(TO_FROM_DATE) {
 					et = (EditText)findViewById(R.id.newEventFromDate);
-					startMonth = month + "_" + year;
-					startDay = day + "_" + month + "_" + year;
+					startMonth = months[month] + "_" + String.valueOf(year);
+					startDay = months[month] + "_" +String.valueOf(day) + "_" +  String.valueOf(year);
+					Log.d("startMonth", startMonth);
+					Log.d("startDay", startDay);
 				}
 				else et = (EditText)findViewById(R.id.newEventToDate);
 				et.setText((month+1) + "/" + day + "/" + year);
@@ -160,24 +167,28 @@ public class NewEventActivity extends Activity {
 					JSONObject event = new JSONObject();
 					TextView etext = (TextView)findViewById(R.id.newEventName);
 					CharSequence text = etext.getText();
-					Log.d("TEXT", text.toString());
+					Log.d("NAME", text.toString());
 					event.put("name",text.toString());
 					etext = (TextView)findViewById(R.id.newEventFromDate);
 					text = etext.getText();
+					Log.d("FROM DATE", text.toString());
 					event.put("fromDate",text.toString());
 					etext = (TextView)findViewById(R.id.newEventToDate);
 					text = etext.getText();
+					Log.d("TO DATE", text.toString());
 					event.put("toDate",text.toString());
 					etext = (TextView)findViewById(R.id.newEventFromTime);
 					text = etext.getText();
-					event.put("fromDate",text.toString());
+					Log.d("FROM TIME", text.toString());
+					event.put("fromTime",text.toString());
 					etext = (TextView)findViewById(R.id.newEventToTime);
 					text = etext.getText();
+					Log.d("TO TIME", text.toString());
 					event.put("toTime",text.toString());
 					currentUser.put(startMonth, startDay);
 					currentUser.put(startDay, event);
 					currentUser.saveEventually();
-					doneText = "Congratulations!! Saved: " + startDay;
+					doneText = ("Congratulations!! Saved: " + startDay);
 					duration = Toast.LENGTH_LONG;
 					Toast.makeText(errorContext, doneText, duration).show();
 					finish();
