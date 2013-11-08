@@ -7,32 +7,4 @@
     android:paddingRight="16dp" 
     android:background="@drawable/twenty_two_degree">
 
-    <Button
-        android:id="@+id/listNewEvent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/listMonthView"
-        android:layout_alignBottom="@+id/listMonthView"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="22dp"
-        android:minHeight="36dp"
-        android:minWidth="48dp"
-        android:text="@string/new_event_button"
-        android:onClick="newEvent"
-        tools:ignore="HardcodedText" />
-
-    <Button
-        android:id="@+id/listMonthView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="25dp"
-        android:minHeight="36dp"
-        android:minWidth="70dp"
-        android:text="@string/month_view_button"
-        android:onClick="monthView"
-        tools:ignore="HardcodedText" />
-
 </RelativeLayout>

@@ -3,6 +3,7 @@ package bb.sxytm.freedum;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +30,12 @@ public class ListActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+        case R.id.listNewEvent:
+        	newEvent();
+        	return true;
+        case R.id.listMonthView:
+        	monthView();
+        	return true;
     	case R.id.Logout:
     		// If logout clicked, then logout :p
     		logout();
@@ -56,13 +63,13 @@ public class ListActivity extends Activity {
     	finish();
     }
     
-    public void newEvent(View v) {
+    public void newEvent() {
     	// Send user to create a new event if pressed
     	Intent intent = new Intent(this, NewEventActivity.class);
     	startActivity(intent);
     }
     
-    public void monthView(View v) {
+    public void monthView() {
     	// Send user to month view if pressed
     	Intent intent = new Intent(this, MonthActivity.class);
     	startActivity(intent);

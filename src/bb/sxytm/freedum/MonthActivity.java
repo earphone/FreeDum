@@ -32,6 +32,12 @@ public class MonthActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+    	case R.id.monthNewEvent:
+    		newEvent();
+    		return true;
+    	case R.id.monthListView:
+    		listView();
+    		return true;
     	case R.id.Logout:
     		// If logout clicked, then logout :p
     		logout();
@@ -59,13 +65,13 @@ public class MonthActivity extends Activity {
     	finish();
     }
 
-    public void newEvent(View v) {
+    public void newEvent() {
     	// Send user to create a new activity if button pressed
 		Intent intent = new Intent(this, NewEventActivity.class);
 		startActivity(intent);
     }
     
-    public void listView(View v) {
+    public void listView() {
     	// Send user to list view if button pressed
     	Intent intent = new Intent(this, ListActivity.class);
     	startActivity(intent);

@@ -1,7 +1,6 @@
 package bb.sxytm.freedum;
 
 import java.util.Calendar;
-import java.util.Locale;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +21,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 public class NewEventActivity extends Activity {
@@ -163,7 +165,7 @@ public class NewEventActivity extends Activity {
 	        	finish();
 			}
 			else {
-					// Save all event information in a JSON array
+					// Put all event information in a JSON array
 					JSONObject event = new JSONObject();
 					TextView etext = (TextView)findViewById(R.id.newEventName);
 					CharSequence text = etext.getText();
@@ -185,9 +187,18 @@ public class NewEventActivity extends Activity {
 					text = etext.getText();
 					Log.d("TO TIME", text.toString());
 					event.put("toTime",text.toString());
-					currentUser.put(startMonth, startDay);
-					currentUser.put(startDay, event);
-					currentUser.saveEventually();
+					
+					// Add username to front of startMonth and startDay
+					startMonth = currentUser.getUsername() + "_" + startMonth;
+					startDay = currentUser.getUsername() + "_" + startDay;
+					
+					// Save
+					ParseObject sMonth = new ParseObject(startMonth);
+					ParseObject sDay = new ParseObject(startDay);
+					sMonth.put(startMonth, startDay);
+					sMonth.saveEventually();
+					sDay.put(startDay, event);
+					sDay.saveEventually();
 					doneText = ("Congratulations!! Saved: " + startDay);
 					duration = Toast.LENGTH_LONG;
 					Toast.makeText(errorContext, doneText, duration).show();

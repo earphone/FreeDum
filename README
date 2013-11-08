@@ -7,10 +7,23 @@ This is a social free time collaboration app for the Android OS.
 
 ToDO:	
 	Check for internet when starting up app.
+	Fix OutOfMemoryException
 	Stop background from scrunching up when keyboard pops up.
 	Save input when pressing ENTER.
 
 Update Logs will be posted here
+
+Nov 07, 2013:	Brandon Higashi
+	Removed the button from month and list activites and moved them to the
+		actionbar
+	Temporarily removed the background from NewEventActivity due to unknown
+		cause of OutOfMemoryException that crashes app
+	Changed the place where data is saved
+		Now saves in public classes username_month_year and
+			username_month_day_year 
+		Currently puts multiple copies of the same day in
+			username_month_year
+			Working on finding a fix that checks before updating
 
 Nov 06, 2013:	Brandon Higashi
 	Fixed Layout sizes so they are now 2048 or less
