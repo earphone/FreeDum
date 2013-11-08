@@ -38,15 +38,27 @@ public class NewEventActivity extends Activity {
 
 		
 		// OnCreate sets the dates and times to current
-	    @Override
+		@Override
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.activity_new_event);
+	        
+	     // Get the message from the intent from Calendar day
+			Intent intent = getIntent();
+			String message = intent.getStringExtra(MonthActivity.EXTRA_MESSAGE);
 	        Calendar c=Calendar.getInstance();
-	        int year = c.get(Calendar.YEAR);
-	        int month = c.get(Calendar.MONTH);
-	        int day = c.get(Calendar.DAY_OF_MONTH);
-	        EditText FromDateEdit = (EditText) findViewById(R.id.newEventFromDate);
+			if(message==null) {
+				year = c.get(Calendar.YEAR);
+				month = c.get(Calendar.MONTH);
+				day = c.get(Calendar.DAY_OF_MONTH);
+			}
+			else {
+				String[] dmy = message.split(" ");
+				day = Integer.parseInt(dmy[0]);
+				month = Integer.parseInt(dmy[1]);
+				year = Integer.parseInt(dmy[2]);
+			}
+			EditText FromDateEdit = (EditText) findViewById(R.id.newEventFromDate);
 	  	  	String text = (month + 1) + "/" + day + "/" + year;
 	  	  	FromDateEdit.setText(text);
 	  	    EditText ToDateEdit = (EditText) findViewById(R.id.newEventToDate);

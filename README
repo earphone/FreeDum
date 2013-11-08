@@ -6,12 +6,20 @@
 This is a social free time collaboration app for the Android OS.
 
 ToDO:	
+	Make calendar move forward or backward on arrow click
+	Change calendar boxes for dates that have events
 	Check for internet when starting up app.
 	Fix OutOfMemoryException
 	Stop background from scrunching up when keyboard pops up.
 	Save input when pressing ENTER.
 
 Update Logs will be posted here
+
+Nov 08, 2013:	Brandon Higashi
+	Implemented a calendar view in the MonthActivity
+	Clicking on a day will launch NewEventActivity with selected day
+	Added left and right arrows to res/drawable-hdpi
+		Arrows don't do anything visually yet
 
 Nov 07, 2013:	Brandon Higashi
 	Removed the button from month and list activites and moved them to the

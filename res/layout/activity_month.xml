@@ -7,4 +7,32 @@
     android:paddingRight="16dp" 
     android:background="@drawable/zero_degree">
 
+    <CalendarView
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:showWeekNumber="false"
+        android:background="#FFFFFF" />
+
+    <ImageButton
+        android:id="@+id/montNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/calendar"
+        android:layout_marginRight="40dp"
+        android:onClick="nextMonth"
+        android:src="@drawable/arrow_right" />
+
+    <ImageButton
+        android:id="@+id/monthPrevious"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/calendar"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="44dp"
+        android:onClick="previousMonth"
+        android:src="@drawable/arrow_left" />
+
 </RelativeLayout>
