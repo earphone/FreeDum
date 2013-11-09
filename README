@@ -10,10 +10,13 @@ ToDO:
 	Change calendar boxes for dates that have events
 	Check for internet when starting up app.
 	Fix OutOfMemoryException
-	Stop background from scrunching up when keyboard pops up.
 	Save input when pressing ENTER.
 
 Update Logs will be posted here
+
+Nov 08, 2013:  Brenden Takai
+	Fixed scrunching when keyboard pops up.
+	Still trying to get list activity to work.
 
 Nov 08, 2013:	Brandon Higashi
 	Implemented a calendar view in the MonthActivity
@@ -50,7 +53,6 @@ Nov 06, 2013:	Brandon Higashi
 Nov 03, 2013:   Brenden Takai
 	Uploaded Revised Layouts.
 		Working on ListActivity.
-		Also need to fix background scrunching.
 
 Oct 29, 2013:	Brandon Higashi
 	Removed ALL Time and Date Picker Fragments to save space.

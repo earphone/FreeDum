@@ -5,7 +5,8 @@
     android:layout_height="fill_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp" 
-    android:background="@drawable/zero_degree">
+    android:background="@drawable/zero_degree"
+    android:windowSoftInputMode="stateVisible|adjustPan">
 
     <CalendarView
         android:id="@+id/calendar"

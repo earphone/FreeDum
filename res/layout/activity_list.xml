@@ -5,6 +5,7 @@
     android:layout_height="fill_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp" 
-    android:background="@drawable/twenty_two_degree">
+    android:background="@drawable/twenty_two_degree"
+    android:windowSoftInputMode="stateVisible|adjustPan">
 
 </RelativeLayout>

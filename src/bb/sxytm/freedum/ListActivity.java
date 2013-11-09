@@ -1,5 +1,7 @@
 package bb.sxytm.freedum;
 
+import java.util.Calendar;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -8,16 +10,40 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CalendarView;
 import android.widget.Toast;
+import android.widget.CalendarView.OnDateChangeListener;
 
+import com.parse.Parse;
 import com.parse.ParseUser;
 
 public class ListActivity extends Activity {
 
+	int year, month, day;
+	public final static String EXTRA_MESSAGE = "bb.sxytm.freedum.MESSAGE";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list);
+		Parse.initialize(this, "GsPuRscxaR95D6ELavshA2X9zsGfIMnqHegQgeo5", "KRzPHVrLf0mCL8pQfkNFmQfhefdKuN9OBnkO5cP7");
+		
+		// Get current month
+		Calendar c=Calendar.getInstance();
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DAY_OF_MONTH);
+
+        // Sends user to new event activity if they select a day
+        CalendarView calendarView=(CalendarView) findViewById(R.id.calendar);
+        calendarView.setOnDateChangeListener(new OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month,
+                    int dayOfMonth) {
+            	Toast.makeText(getApplicationContext(), dayOfMonth+" "+month+" "+year, 0).show();
+            }
+        });
+        
 	}
 
 	@Override
@@ -75,5 +101,13 @@ public class ListActivity extends Activity {
     	startActivity(intent);
     	finish();
     }
-
+    
+    // Called when the user clicks on a day
+    public void sendMessage(int sMonth, int sDay, int sYear) {
+    	// Do something in response to button
+    	Intent intent = new Intent(this, NewEventActivity.class);
+    	String message = sMonth + " " + sDay + " " + sYear;
+    	intent.putExtra(EXTRA_MESSAGE, message);
+    	startActivity(intent);
+    }
 }
