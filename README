@@ -6,6 +6,7 @@
 This is a social free time collaboration app for the Android OS.
 
 ToDO:	
+	Optimize.
 	Make calendar move forward or backward on arrow click
 	Change calendar boxes for dates that have events
 	Check for internet when starting up app.
@@ -13,6 +14,14 @@ ToDO:
 	Save input when pressing ENTER.
 
 Update Logs will be posted here
+
+Nov 12, 2013:	Brandon Higashi
+	Reworked month view to have a list view below
+		Shows all events on current selected day
+		Syncs with major holidays
+		Slow since calls Parse everytime a day is selected
+	Changed background for login
+	Sign-up textboxes are no longer clear
 
 Nov 08, 2013:  Brenden Takai
 	Fixed scrunching when keyboard pops up.

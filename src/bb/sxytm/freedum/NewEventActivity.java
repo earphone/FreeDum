@@ -123,10 +123,11 @@ public class NewEventActivity extends Activity {
 				year = mYear;
 				month = monthOfYear;
 				day = dayOfMonth;
+				String sday = (day < 10 ? "0" : "") + day;
 				if(TO_FROM_DATE) {
 					et = (EditText)findViewById(R.id.newEventFromDate);
 					startMonth = months[month] + "_" + String.valueOf(year);
-					startDay = months[month] + "_" +String.valueOf(day) + "_" +  String.valueOf(year);
+					startDay = months[month] + "_" + sday + "_" +  String.valueOf(year);
 					Log.d("startMonth", startMonth);
 					Log.d("startDay", startDay);
 				}
@@ -208,7 +209,7 @@ public class NewEventActivity extends Activity {
 					ParseObject sMonth = new ParseObject(startMonth);
 					ParseObject sDay = new ParseObject(startDay);
 					sMonth.put(startMonth, startDay);
-					sMonth.saveEventually();
+					sMonth.saveInBackground();
 					sDay.put(startDay, event);
 					sDay.saveEventually();
 					doneText = ("Congratulations!! Saved: " + startDay);

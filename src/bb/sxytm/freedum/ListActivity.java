@@ -35,7 +35,7 @@ public class ListActivity extends Activity {
         day = c.get(Calendar.DAY_OF_MONTH);
 
         // Sends user to new event activity if they select a day
-        CalendarView calendarView=(CalendarView) findViewById(R.id.calendar);
+        CalendarView calendarView=(CalendarView) findViewById(R.layout.activity_list);
         calendarView.setOnDateChangeListener(new OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month,
