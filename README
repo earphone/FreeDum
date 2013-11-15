@@ -6,14 +6,20 @@
 This is a social free time collaboration app for the Android OS.
 
 ToDO:	
-	Optimize.
-	Make calendar move forward or backward on arrow click
-	Change calendar boxes for dates that have events
+	Optimize OnClick calls from Parse.
+	Make calendar boxes with events refresh on arrow click.
 	Check for internet when starting up app.
-	Fix OutOfMemoryException
 	Save input when pressing ENTER.
 
 Update Logs will be posted here
+
+Nov 14, 2013:	Brandon Higashi
+	Optimized the calls to Parse when creating the calendar
+		Made a listArray that holds all days instead of calling
+			Parse each time
+	Changed the new event sign from "+" to "FreeDUM"
+	Changed the title in new event to "New FreeDUM"
+	
 
 Nov 12, 2013:	Brandon Higashi
 	Reworked month view to have a list view below

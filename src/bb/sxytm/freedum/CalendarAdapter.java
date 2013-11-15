@@ -17,7 +17,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -43,6 +42,8 @@ public class CalendarAdapter extends BaseAdapter{
     String itemvalue, curentDateString;
 	public static final String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     DateFormat df;
+    List<ParseObject> daysInMonth = new ArrayList<ParseObject>();
+    List<String> namesOfDays = new ArrayList<String>();
 
     private ArrayList<String> items;
     public static List<String> dayString;
@@ -60,6 +61,7 @@ public class CalendarAdapter extends BaseAdapter{
             this.items = new ArrayList<String>();
             df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
             curentDateString = df.format(selectedDate.getTime());
+ 
             refreshDays();
     }
 
@@ -70,6 +72,31 @@ public class CalendarAdapter extends BaseAdapter{
                     }
             }
             this.items = items;
+            
+            // Get days that have events from Parse
+            String[] substring = curentDateString.split("-");
+            final String currentMonth = currentUser.getUsername() + "_" + months[Integer.parseInt(substring[1])-1] + "_" + substring[0];
+            Log.d("currentMonth",currentMonth);
+            ParseQuery<ParseObject> query = ParseQuery.getQuery(currentMonth);
+            try {
+				daysInMonth = query.find();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
+            String listString = "";
+            String current = "";
+
+            for (ParseObject s : daysInMonth)
+            {
+            	if(s.get(currentMonth)!=null) {
+            		current = s.get(currentMonth).toString();
+            		listString += current + "\t";
+            		namesOfDays.add(current);
+            	}
+            }
+            Log.d("daysInMonth", listString);
     }
 
     public int getCount() {
@@ -135,26 +162,25 @@ public class CalendarAdapter extends BaseAdapter{
                     monthStr = "0" + monthStr;
             }
 
+            // Check for event
             String[] substring = date.split("-");
             boolean found = false;
             final String currentDay = currentUser.getUsername() + "_" + months[Integer.parseInt(substring[1])-1] + "_" + substring[2] + "_" + substring[0];
-            Log.d("currentDay",currentDay);
-            ParseQuery<ParseObject> query = ParseQuery.getQuery(currentDay);
-            try {
-				if(query.count() != 0) found = true;
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//            Log.d("currentDay : contained",currentDay + " : " + namesOfDays.contains(currentDay));
+            if(namesOfDays != null && namesOfDays.contains(currentDay)) found = true;
+
             // show icon if date is not empty and it exists in the items array
            ImageView iw = (ImageView) v.findViewById(R.id.date_icon);
-            if (date.length() > 0 && items != null && items.contains(date) || found) {
-                    iw.setVisibility(View.VISIBLE);
-            } else {
-                    iw.setVisibility(View.INVISIBLE);
+            if (date.length() > 0 && items != null && items.contains(date)) {
+                iw.setVisibility(View.VISIBLE);
+            } 
+            else if(found) {
+            	iw.setVisibility(View.VISIBLE);
+            }
+            else {
+                iw.setVisibility(View.INVISIBLE);
             }
             found = false;
-
             return v;
     }
 
@@ -169,6 +195,8 @@ public class CalendarAdapter extends BaseAdapter{
 
     public void refreshDays() {
             // clear items
+    		namesOfDays.clear();
+    		daysInMonth.clear();
             items.clear();
             dayString.clear();
             Locale.setDefault(Locale.US);

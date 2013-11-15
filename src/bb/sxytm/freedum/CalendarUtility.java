@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -15,10 +14,6 @@ public class CalendarUtility {
     public static ArrayList<String> startDates = new ArrayList<String>();
     public static ArrayList<String> endDates = new ArrayList<String>();
     public static ArrayList<String> descriptions = new ArrayList<String>();
-    public static ArrayList<String> startFromTimes = new ArrayList<String>();
-    public static ArrayList<String> startToTimes = new ArrayList<String>();
-    public static ArrayList<String> endFromTimes = new ArrayList<String>();
-    public static ArrayList<String> endToTimes = new ArrayList<String>();
 
     public static ArrayList<String> readCalendarEvent(Context context) {
             Cursor cursor = context.getContentResolver()
@@ -54,8 +49,6 @@ public class CalendarUtility {
             }
             return nameOfEvent;
     }
-
-    @SuppressLint("SimpleDateFormat")
 	public static String getDate(long milliSeconds) {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Calendar calendar = Calendar.getInstance();

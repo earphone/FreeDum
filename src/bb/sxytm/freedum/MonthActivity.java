@@ -3,6 +3,7 @@ package bb.sxytm.freedum;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -38,7 +39,7 @@ import com.parse.ParseUser;
 
 public class MonthActivity extends Activity {
 	
-	public final static String EXTRA_MESSAGE = "bb.sxytm.freedum.MESSAGE";
+	public static String EXTRA_MESSAGE = "bb.sxytm.freedum.MESSAGE";
 	public static final String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 	
     public GregorianCalendar month, itemmonth;// calendar instances.
@@ -52,7 +53,12 @@ public class MonthActivity extends Activity {
     LinearLayout rLayout;
     ArrayList<String> date;
     ArrayList<String> desc;
-
+    
+    Calendar c=Calendar.getInstance();
+	int cYear = c.get(Calendar.YEAR);
+	int cMonth = c.get(Calendar.MONTH);
+	int cDay = c.get(Calendar.DAY_OF_MONTH);
+	
     public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
     		Parse.initialize(this, "GsPuRscxaR95D6ELavshA2X9zsGfIMnqHegQgeo5", "KRzPHVrLf0mCL8pQfkNFmQfhefdKuN9OBnkO5cP7"); 
@@ -134,9 +140,12 @@ public class MonthActivity extends Activity {
                                     }
                             }
                             
-                            // Test for Parse
+                            // Get data from Parse
                             String[] substring = selectedGridDate.split("-");
-                            final String currentDay = currentUser.getUsername() + "_" + months[Integer.parseInt(substring[1])-1] + "_" + substring[2] + "_" + substring[0];
+                            cMonth = Integer.parseInt(substring[1])-1;
+                            cDay = Integer.parseInt(substring[2]);
+                            cYear = Integer.parseInt(substring[0]);
+                            final String currentDay = currentUser.getUsername() + "_" + months[cMonth] + "_" + cDay + "_" + cYear;
                             Log.d("currentDay",currentDay);
                             ParseQuery<ParseObject> query = ParseQuery.getQuery(currentDay);
                             query.findInBackground(new FindCallback<ParseObject>() {
@@ -307,7 +316,7 @@ public class MonthActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
     	case R.id.monthNewEvent:
-    		newEvent();
+    		sendMessage(cMonth, cDay, cYear);
     		return true;
     	case R.id.monthListView:
     		listView();
@@ -380,7 +389,8 @@ public class MonthActivity extends Activity {
     public void sendMessage(int sMonth, int sDay, int sYear) {
     	// Do something in response to button
     	Intent intent = new Intent(this, NewEventActivity.class);
-    	String message = sMonth + " " + sDay + " " + sYear;
+    	String message = sDay + " " + sMonth + " " + sYear;
+    	Log.d("Message", message);
     	intent.putExtra(EXTRA_MESSAGE, message);
     	startActivity(intent);
     }
