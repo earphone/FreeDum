@@ -18,6 +18,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,7 +87,7 @@ public class MonthActivity extends Activity {
             title.setText(android.text.format.DateFormat.format("MMMM yyyy", month));
 
             RelativeLayout previous = (RelativeLayout) findViewById(R.id.previous);
-
+            
             previous.setOnClickListener(new OnClickListener() {
 
                     @Override
@@ -148,40 +150,49 @@ public class MonthActivity extends Activity {
                             final String currentDay = currentUser.getUsername() + "_" + months[cMonth] + "_" + cDay + "_" + cYear;
                             Log.d("currentDay",currentDay);
                             ParseQuery<ParseObject> query = ParseQuery.getQuery(currentDay);
+                            query = query.orderByAscending("time");
                             query.findInBackground(new FindCallback<ParseObject>() {
                               public void done(List<ParseObject> objects, ParseException e) {
                                 if (e == null) {
                                 	desc = new ArrayList<String>();
                                 	if(objects == null || objects.size() == 0) return;
                                 	Log.d("objects.size", objects.size()+"");
-                                	String events = "";
+                                	String event = "";
+                                	String fTime = "";
+                                	String tTime = "";
                                   for(int i = 0; i < objects.size(); i ++) {
                                 	  Log.d("i", i+"");
                                 	  try {
-										events = objects.get(i).getJSONObject(currentDay).getString("name");
+										event = objects.get(i).getJSONObject(currentDay).getString("name");
+										fTime = objects.get(i).getJSONObject(currentDay).getString("fromTime");
+										tTime = objects.get(i).getJSONObject(currentDay).getString("toTime");
 									} catch (JSONException e1) {
 										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
-									Log.d("added", events);
-                                	desc.add(events);
+                                	  Log.d("added", event);
+                                	  //desc.add(events);
                                 	
-                                	Log.d("desc.size", desc.size()+"");
-                                    if (desc.size() > 0) {
-                                            for (int j = 0; j < desc.size(); j++) {
-                                                    TextView rowTextView = new TextView(MonthActivity.this);
+                                	  Log.d("desc.size", desc.size()+"");
+                                	  Log.d("Setting rowText 1", i+"");
+                                	  TextView eventTextView = new TextView(MonthActivity.this);
 
-                                                    // set some properties of rowTextView or something
-                                                    rowTextView.setText("Event:" + desc.get(i));
-                                                    rowTextView.setTextColor(Color.BLACK);
-                                                    rowTextView.setBackgroundColor(0xFF00FF00);
+                                	  // set some properties of eventTextView
+                                	  eventTextView.setText("Event: " + event);
+                                	  eventTextView.setTextColor(Color.BLACK);
+                                	  eventTextView.setBackgroundColor(0xFF00FF00);
+                                	  eventTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 
-                                                    // add the textview to the linearlayout
-                                                    rLayout.addView(rowTextView);
-
-                                            }
-
-                                    }
+                                	  // add the textview to the linearlayout	
+                                	  rLayout.addView(eventTextView);
+                                	  
+                                	  // set some properties for timeTextView
+                                	  TextView timeTextView = new TextView(MonthActivity.this);
+                                	  timeTextView.setText("\t\t" + fTime + " - " + tTime);
+                                	  timeTextView.setTextColor(Color.BLACK);
+                                	  timeTextView.setBackgroundColor(Color.parseColor("#FF00DD"));
+                                	  timeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                                	  rLayout.addView(timeTextView);
                                   }
                                 } else {
                                   // Failed
@@ -192,6 +203,7 @@ public class MonthActivity extends Activity {
                             Log.d("desc.size", desc.size()+"");
                             if (desc.size() > 0) {
                                     for (int i = 0; i < desc.size(); i++) {
+                                    		Log.d("Setting rowText 2", i+"");
                                             TextView rowTextView = new TextView(MonthActivity.this);
 
                                             // set some properties of rowTextView or something

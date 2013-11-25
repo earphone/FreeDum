@@ -13,6 +13,13 @@ ToDO:
 
 Update Logs will be posted here
 
+Nov 24, 2013:	Brandon Higashi
+	Added time value to username_month_day_year so that they can be sorted 
+		by time when queried
+	Fixed bug for repeated events
+	Added row view for times below event
+	Increasd size of times
+
 Nov 14, 2013:	Brandon Higashi
 	Optimized the calls to Parse when creating the calendar
 		Made a listArray that holds all days instead of calling

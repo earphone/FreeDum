@@ -192,14 +192,14 @@ public class NewEventActivity extends Activity {
 					text = etext.getText();
 					Log.d("TO DATE", text.toString());
 					event.put("toDate",text.toString());
-					etext = (TextView)findViewById(R.id.newEventFromTime);
-					text = etext.getText();
-					Log.d("FROM TIME", text.toString());
-					event.put("fromTime",text.toString());
 					etext = (TextView)findViewById(R.id.newEventToTime);
 					text = etext.getText();
 					Log.d("TO TIME", text.toString());
 					event.put("toTime",text.toString());
+					etext = (TextView)findViewById(R.id.newEventFromTime);
+					text = etext.getText();
+					Log.d("FROM TIME", text.toString());
+					event.put("fromTime",text.toString());
 					
 					// Add username to front of startMonth and startDay
 					startMonth = currentUser.getUsername() + "_" + startMonth;
@@ -211,6 +211,7 @@ public class NewEventActivity extends Activity {
 					sMonth.put(startMonth, startDay);
 					sMonth.saveInBackground();
 					sDay.put(startDay, event);
+					sDay.put("time", text.toString());
 					sDay.saveEventually();
 					doneText = ("Congratulations!! Saved: " + startDay);
 					duration = Toast.LENGTH_LONG;
