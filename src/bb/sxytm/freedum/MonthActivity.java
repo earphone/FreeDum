@@ -9,10 +9,11 @@ import java.util.List;
 import java.util.Locale;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,9 +26,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,12 +39,15 @@ import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class MonthActivity extends Activity {
 	
 	public static String EXTRA_MESSAGE = "bb.sxytm.freedum.MESSAGE";
 	public static final String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+	public static final int DIALOG = 0;
 	
     public GregorianCalendar month, itemmonth;// calendar instances.
 
@@ -333,6 +338,9 @@ public class MonthActivity extends Activity {
     	case R.id.monthListView:
     		listView();
     		return true;
+    	case R.id.newFriend:
+    		addFriend();
+    		return true;
     	case R.id.Logout:
     		// If logout clicked, then logout :p
     		logout();
@@ -359,7 +367,127 @@ public class MonthActivity extends Activity {
     	}
     	finish();
     }
+    
+    // Add a new friend to the users friend list
+    public void addFriend() {
+   // 	showDialog(DIALOG);
+    	Log.d("Add Friend Progress", "Starting creeation");
+    	// User an EditText view to get user input
+    	final EditText input = new EditText(this);
+    	input.setId(R.id.userSearch);
+    	final AlertDialog d = new AlertDialog.Builder(MonthActivity.this)
+    	.setView(input)
+    	.setIcon(R.drawable.search)
+        .setTitle(R.string.new_friend_button)
+        .setMessage("Who do you want to add")
+        .setPositiveButton(android.R.string.ok, null) //Set to null. We override the onclick
+        .setNegativeButton(android.R.string.cancel, null)
+        .setNeutralButton(R.string.new_friend_search, null)
+        .create();
+    	
+    	Log.d("Add Friend Progress", "Finished creation");
+    	d.setOnShowListener(new DialogInterface.OnShowListener() {
 
+    		@Override
+    		public void onShow(DialogInterface dialog) {
+    			Log.d("Add Friend Progress", "onShow");
+    			Button save = d.getButton(AlertDialog.BUTTON_POSITIVE);
+    			save.setOnClickListener(new View.OnClickListener() {
+
+    				@Override
+    				public void onClick(View view) {
+    					String value = input.getText().toString();
+    					Log.d("Dialog Action", "SAVING");
+    					//Dismiss once everything is OK
+    					final String username = input.getText().toString();
+
+						Toast.makeText(getApplicationContext(), "Checking . . .", Toast.LENGTH_SHORT).show();
+						final ParseQuery<ParseUser> query = ParseUser.getQuery();
+						query.whereEqualTo("username", username);
+						List<ParseUser> users = new ArrayList<ParseUser>();
+						try {
+							users = query.find();
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							Toast.makeText(getApplicationContext(), "User not found",Toast.LENGTH_LONG).show();
+						}
+						for(ParseUser u : users) {
+							Log.d("User", u.getString("username"));
+						}
+						final ParseUser currentUser = ParseUser.getCurrentUser();
+		                if (currentUser != null) {
+		                    {
+		                        final ParseObject friend = new ParseObject("Friends");
+		                        friend.put("username", username);
+
+		                        friend.saveInBackground(new SaveCallback() {
+		                            @Override
+		                            public void done(ParseException e) {
+		                                // TODO Auto-generated method stub
+		                                ParseRelation relation = currentUser.getRelation("Friends");
+		                                ParseQuery query = relation.getQuery();
+		                                query.whereEqualTo("username", null);
+		                                try {
+											query.find();
+										} catch (ParseException e1) {
+											// TODO Auto-generated catch block
+
+											Toast.makeText(getApplicationContext(), "Saving . . .", Toast.LENGTH_SHORT).show();
+											e1.printStackTrace();
+											relation.add(friend);
+											currentUser.saveInBackground();
+											Toast.makeText(getApplicationContext(), username + " is now your friend", Toast.LENGTH_LONG).show();
+											d.dismiss();
+										}
+		                                Toast.makeText(getApplicationContext(), username + " is already a friend",Toast.LENGTH_LONG).show();
+		                            }
+		                        });
+		                    }
+		                }
+    				}
+    			});
+    			
+    			Button cancel = d.getButton(AlertDialog.BUTTON_NEGATIVE);
+    			cancel.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View view) {
+						Log.d("Dialog Action", "CANCELING");
+						d.dismiss();
+					}
+				});
+    			
+    			Button search = d.getButton(AlertDialog.BUTTON_NEUTRAL);
+    			search.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						Log.d("Dialog Action", "SEARCHING");
+						final String username = input.getText().toString();
+						Toast.makeText(getApplicationContext(), "Searching . . .",Toast.LENGTH_LONG).show();
+						final ParseQuery<ParseUser> query = ParseUser.getQuery();
+						query.whereEqualTo("username", username);
+						
+						List<ParseUser> users = new ArrayList<ParseUser>();
+						try {
+							users = query.find();
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							Toast.makeText(getApplicationContext(), "User not found",Toast.LENGTH_LONG).show();
+						}
+						for(ParseUser u : users) {
+							Log.d("User", u.getString("username"));
+						}
+						Toast.makeText(getApplicationContext(), "User " + users.get(0).getString("username") + " found",Toast.LENGTH_LONG).show();
+					}
+				});	
+    		}
+    	});
+    	d.show();
+    }
+    
     // Send user to create a new activity if button pressed
     public void newEvent() {
 		Intent intent = new Intent(this, NewEventActivity.class);

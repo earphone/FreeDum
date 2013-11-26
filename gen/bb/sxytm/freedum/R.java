@@ -35,26 +35,28 @@ public final class R {
         public static final int fourty_five_degree=0x7f02000b;
         public static final int ic_launcher=0x7f02000c;
         public static final int list_item_background=0x7f02000d;
-        public static final int seventy_eight_degree=0x7f02000e;
-        public static final int sixty_seven_degree=0x7f02000f;
-        public static final int thirty_three_degree=0x7f020010;
-        public static final int twenty_two_degree=0x7f020011;
-        public static final int zero_degree=0x7f020012;
+        public static final int search=0x7f02000e;
+        public static final int seventy_eight_degree=0x7f02000f;
+        public static final int sixty_seven_degree=0x7f020010;
+        public static final int thirty_three_degree=0x7f020011;
+        public static final int twenty_two_degree=0x7f020012;
+        public static final int zero_degree=0x7f020013;
     }
     public static final class id {
-        public static final int Logout=0x7f080020;
+        public static final int Logout=0x7f080022;
         public static final int RelativeLayout1=0x7f080000;
-        public static final int action_settings=0x7f08001f;
+        public static final int action_settings=0x7f080021;
+        public static final int addFriendResults=0x7f08001c;
         public static final int button_login=0x7f080005;
-        public static final int date=0x7f08001b;
-        public static final int date_icon=0x7f08001c;
+        public static final int date=0x7f08001d;
+        public static final int date_icon=0x7f08001e;
         public static final int forgot_password=0x7f080004;
         public static final int gridview=0x7f08000a;
         public static final int header=0x7f080006;
-        public static final int listMonthView=0x7f08001e;
-        public static final int listNewEvent=0x7f08001d;
-        public static final int monthListView=0x7f080022;
-        public static final int monthNewEvent=0x7f080021;
+        public static final int listMonthView=0x7f080020;
+        public static final int listNewEvent=0x7f08001f;
+        public static final int monthListView=0x7f080024;
+        public static final int monthNewEvent=0x7f080023;
         public static final int newCancelButton=0x7f08000d;
         public static final int newEventForm=0x7f08000e;
         public static final int newEventFromDate=0x7f080011;
@@ -64,6 +66,7 @@ public final class R {
         public static final int newEventToDate=0x7f080014;
         public static final int newEventToHelp=0x7f080013;
         public static final int newEventToTime=0x7f080015;
+        public static final int newFriend=0x7f080025;
         public static final int newSaveButton=0x7f08000c;
         public static final int next=0x7f080009;
         public static final int passwordLogin=0x7f080002;
@@ -76,6 +79,7 @@ public final class R {
         public static final int signupUsername=0x7f080016;
         public static final int text=0x7f08000b;
         public static final int title=0x7f080008;
+        public static final int userSearch=0x7f08001b;
         public static final int usernameLogin=0x7f080001;
     }
     public static final class layout {
@@ -85,7 +89,8 @@ public final class R {
         public static final int activity_month=0x7f030003;
         public static final int activity_new_event=0x7f030004;
         public static final int activity_sign_up=0x7f030005;
-        public static final int calendar_item=0x7f030006;
+        public static final int add_friend=0x7f030006;
+        public static final int calendar_item=0x7f030007;
     }
     public static final class menu {
         public static final int list=0x7f070000;
@@ -114,6 +119,9 @@ public final class R {
         public static final int month_view_button=0x7f050012;
         public static final int name_hint=0x7f050014;
         public static final int new_event_button=0x7f050011;
+        public static final int new_friend_button=0x7f05001f;
+        public static final int new_friend_results_hint=0x7f050021;
+        public static final int new_friend_search=0x7f050020;
         public static final int password_forgot=0x7f05000e;
         public static final int password_hint=0x7f05000d;
         public static final int save_button=0x7f050019;

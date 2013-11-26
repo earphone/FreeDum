@@ -69,6 +69,7 @@ public class LoginActivity extends Activity {
 					Toast.makeText(context, text + username, duration).show();
 					Intent intent = new Intent(context, MonthActivity.class);
 					startActivity(intent);
+					finish();
 				} else {
 					// Signin failed
 					// Return back to this activity
@@ -77,7 +78,6 @@ public class LoginActivity extends Activity {
 					int duration = Toast.LENGTH_LONG;
 					Toast.makeText(context, text, duration).show();
 					Intent intent = getIntent();
-					finish();
 					startActivity(intent);
 				}
 			}

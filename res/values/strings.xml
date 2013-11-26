@@ -32,5 +32,8 @@
     <string name="date_hint">Date</string>
     <string name="to_help">TO</string>
     <string name="time_hint">Time</string>
+    <string name="new_friend_button">Add Friend</string>
+    <string name="new_friend_search">Search</string>
+    <string name="new_friend_results_hint">Results</string>
 
 </resources>

@@ -13,7 +13,16 @@ ToDO:
 
 Update Logs will be posted here
 
+Nov 25, 2013:	Brandon Higashi
+	Finished dialog for adding and checking for friend
+		Only implemented in monthActivity
+		Inefficient due to multiple query calls upon saving
+
 Nov 24, 2013:	Brandon Higashi
+    Friend:
+	Added Dialog for adding a friend in monthActivity
+
+    Aestheti:
 	Added time value to username_month_day_year so that they can be sorted 
 		by time when queried
 	Fixed bug for repeated events

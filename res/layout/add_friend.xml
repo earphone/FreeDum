@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <EditText
+        android:id="@+id/userSearch"
+        style="@android:style/Widget.DeviceDefault.Light.Spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:hint="@string/username_hint" />
+    
+    <TextView
+        android:id="@+id/addFriendResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userSearch"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:hint="@string/new_friend_results_hint"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>

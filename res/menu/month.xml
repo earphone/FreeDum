@@ -1,10 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item android:id="@+id/monthNewEvent" android:title="@string/new_event_button" android:visible="true" android:showAsAction="ifRoom"></item><item android:id="@+id/monthListView" android:title="@string/list_view_button" android:visible="true" android:showAsAction="ifRoom"></item><item android:id="@+id/Logout" android:title="@string/logout_button" android:visible="true" android:enabled="true" android:showAsAction="ifRoom"></item><item
+    <item android:id="@+id/monthNewEvent" android:title="@string/new_event_button" android:visible="true" android:showAsAction="ifRoom"></item><item android:id="@+id/monthListView" android:title="@string/list_view_button" android:visible="true" android:showAsAction="ifRoom"></item><item android:id="@+id/newFriend" android:showAsAction="ifRoom" android:title="@string/new_friend_button"></item><item android:id="@+id/Logout" android:title="@string/logout_button" android:visible="true" android:enabled="true" android:showAsAction="ifRoom"></item><item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_settings"/>
+    
     
     
     
