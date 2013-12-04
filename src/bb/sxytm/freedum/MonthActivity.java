@@ -246,7 +246,7 @@ public class MonthActivity extends Activity {
                                 	  Log.d("added", event);
                                 	  //desc.add(events);
                                 	
-                                	  Log.d("desc.size", desc.size()+"");
+                                	  Log.d("desc.size: user", desc.size()+"");
                                 	  Log.d("Setting rowText 1", i+"");
                                 	  TextView eventTextView = new TextView(MonthActivity.this);
 
@@ -277,7 +277,7 @@ public class MonthActivity extends Activity {
                             if(compare != null && compare != "*NEW_USER*") {
                             	final String compareCurrentDay = compare + "_" + months[cMonth] + "_" + cDay + "_" + cYear;
                                 Log.d("compareCurrentDay",compareCurrentDay);
-                                ParseQuery<ParseObject> queryC = ParseQuery.getQuery(currentDay);
+                                ParseQuery<ParseObject> queryC = ParseQuery.getQuery(compareCurrentDay);
                                 queryC = queryC.orderByAscending("time");
                                 queryC.findInBackground(new FindCallback<ParseObject>() {
                                   public void done(List<ParseObject> objects, ParseException e) {
@@ -303,8 +303,9 @@ public class MonthActivity extends Activity {
                                     	  Log.d("added", event);
                                     	  //desc.add(events);
                                     	
-                                    	  Log.d("desc.size", desc.size()+"");
+                                    	  Log.d("desc.size: compare", desc.size()+"");
                                     	  Log.d("Setting rowText 1", i+"");
+                                    	  Log.d("MonthCompare", "Name: " + event);
                                     	  TextView eventTextView = new TextView(MonthActivity.this);
 
                                     	  // set some properties of eventTextView
@@ -332,7 +333,7 @@ public class MonthActivity extends Activity {
                             }
                             
                             // Get data from calendar and add to layout
-                            Log.d("desc.size", desc.size()+"");
+                            Log.d("desc.size: calendar", desc.size()+"");
                             if (desc.size() > 0) {
                                     for (int i = 0; i < desc.size(); i++) {
                                     		Log.d("Setting rowText 2", i+"");
