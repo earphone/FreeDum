@@ -13,6 +13,10 @@ ToDO:
 
 Update Logs will be posted here
 
+Dec 02, 2013:	Brandon Higashi
+	FIX
+	Fixed a bug that prevented compared friends events from showing up
+
 Dec 03, 2013:	Brandon Higashi
 	SignUpActivity:
 		Now sends a message to MonthActivity if user completed signup
