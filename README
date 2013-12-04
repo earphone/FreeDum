@@ -13,6 +13,35 @@ ToDO:
 
 Update Logs will be posted here
 
+Dec 03, 2013:	Brandon Higashi
+	SignUpActivity:
+		Now sends a message to MonthActivity if user completed signup
+	MonthActivity:
+		Checks if new user and if so creates an event so there is one at
+			month creation
+		Edited gridview.setOnItemClickListener in onCreate to compensate
+			for comparing to another user
+		Changed color of current user to green and compared user to pink
+	CalendarAdapter:
+		Changed instance method to include another parameter called
+			compareFriend
+			Null if not comparing
+		setItems has a section added for the compared user
+		getView now has three image views for showing whether an event 
+			is on that day or not: user, comparedUser, both
+		Added clear to refreshDays for the compared days in month and
+			names of days
+	All:
+		Took out backgrounds created by Brenden and replaced with single
+			color
+
+Nov 29, 2013:	Brandon Higashi
+	Created compareFriend button in monthActivity menu
+	Added compareFriend method in monthActivity
+		Prompts user to select a friend and then relaunches month with
+		friend as EXTRA_MESSAGE so that CalendarAdapter can be created
+		with multiple users.
+
 Nov 25, 2013:	Brandon Higashi
 	Finished dialog for adding and checking for friend
 		Only implemented in monthActivity

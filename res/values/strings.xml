@@ -27,6 +27,7 @@
     <string name="logout_button">LOGOUT</string>
     <string name="cancel_button">X  Cancel</string>
     <string name="save_button">√   Save</string>
+    <string name="compare_button">√   Compare</string>
     <string name="event_name">Event Name</string>
     <string name="from_help">FROM</string>
     <string name="date_hint">Date</string>
@@ -35,5 +36,7 @@
     <string name="new_friend_button">Add Friend</string>
     <string name="new_friend_search">Search</string>
     <string name="new_friend_results_hint">Results</string>
+    <string name="compare_friend">Compare Freedum</string>
+    <string name="select_friend">Select a friend from below</string>
 
 </resources>

@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SignUpActivity" 
-    android:background="@drawable/sixty_seven_degree"
+    android:background="@drawable/background"
     android:windowSoftInputMode="stateVisible|adjustPan">
 
 

@@ -39,20 +39,30 @@ public class CalendarAdapter extends BaseAdapter{
     int lastWeekDay;
     int leftDays;
     int mnthlength;
+    private boolean comparing = false;
+    private String compare;
     String itemvalue, curentDateString;
 	public static final String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     DateFormat df;
     List<ParseObject> daysInMonth = new ArrayList<ParseObject>();
+    List<ParseObject> compareDaysInMonth = new ArrayList<ParseObject>();
     List<String> namesOfDays = new ArrayList<String>();
-
+    List<String> compareNamesOfDays = new ArrayList<String>();
+    
     private ArrayList<String> items;
     public static List<String> dayString;
     private View previousView;
 
     ParseUser currentUser = ParseUser.getCurrentUser();
 
-    public CalendarAdapter(Context c, GregorianCalendar monthCalendar) {
-            CalendarAdapter.dayString = new ArrayList<String>();
+    public CalendarAdapter(Context c, GregorianCalendar monthCalendar, String compareFriend) {
+            Log.d("CalendarAdapter", "compareFriend: " + compareFriend);
+            if(compareFriend != null) {
+            	comparing = true;
+            	compare = compareFriend;
+            	Log.d("CalendarAdapter", "COMPARING: " + comparing);
+            }
+    		CalendarAdapter.dayString = new ArrayList<String>();
             Locale.setDefault(Locale.US);
             month = monthCalendar;
             selectedDate = (GregorianCalendar) monthCalendar.clone();
@@ -72,31 +82,56 @@ public class CalendarAdapter extends BaseAdapter{
                     }
             }
             this.items = items;
-            
-            // Get days that have events from Parse
-            String[] substring = curentDateString.split("-");
-            final String currentMonth = currentUser.getUsername() + "_" + months[Integer.parseInt(substring[1])-1] + "_" + substring[0];
-            Log.d("currentMonth",currentMonth);
-            ParseQuery<ParseObject> query = ParseQuery.getQuery(currentMonth);
-            try {
-				daysInMonth = query.find();
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            
-            String listString = "";
-            String current = "";
-
-            for (ParseObject s : daysInMonth)
-            {
-            	if(s.get(currentMonth)!=null) {
-            		current = s.get(currentMonth).toString();
-            		listString += current + "\t";
-            		namesOfDays.add(current);
-            	}
-            }
+        	// Get days that have events from Parse
+        	String[] substring = curentDateString.split("-");
+        	final String currentMonth = currentUser.getUsername() + "_" + months[Integer.parseInt(substring[1])-1] + "_" + substring[0];
+        	Log.d("currentMonth",currentMonth);
+        	ParseQuery<ParseObject> query = ParseQuery.getQuery(currentMonth);
+        	try {
+        		daysInMonth = query.find();
+        	} catch (ParseException e) {
+        		// TODO Auto-generated catch block
+        		e.printStackTrace();
+        	}
+        
+        	String listString = "";
+        	String current = "";
+        	
+        	for (ParseObject s : daysInMonth)
+        	{
+        		if(s.get(currentMonth)!=null) {
+        			current = s.get(currentMonth).toString();
+        			listString += current + "\t";
+        			namesOfDays.add(current);
+        		}
+        	}
             Log.d("daysInMonth", listString);
+        
+            // Get days that have events for comparing
+            if(comparing) {
+            	final String compareCurrentMonth = compare + "_" + months[Integer.parseInt(substring[1])-1] + "_" + substring[0];
+            	Log.d("compareCurrentMonth", compareCurrentMonth);
+            	ParseQuery compareQuery = ParseQuery.getQuery(compareCurrentMonth);
+                try {
+    				compareDaysInMonth = compareQuery.find();
+    			} catch (ParseException e) {
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			}
+                
+                listString = "";
+                current = "";
+
+                for (ParseObject s : compareDaysInMonth)
+                {
+                	if(s.get(compareCurrentMonth)!=null) {
+                		current = s.get(compareCurrentMonth).toString();
+                		listString += current + "\t";
+                		compareNamesOfDays.add(current);
+                	}
+                }
+            }
+            Log.d("compareDaysInMonth", listString);
     }
 
     public int getCount() {
@@ -162,23 +197,45 @@ public class CalendarAdapter extends BaseAdapter{
                     monthStr = "0" + monthStr;
             }
 
-            // Check for event
+            // Check for event from parse
             String[] substring = date.split("-");
             boolean found = false;
+            boolean compareFound = false;
             final String currentDay = currentUser.getUsername() + "_" + months[Integer.parseInt(substring[1])-1] + "_" + substring[2] + "_" + substring[0];
 //            Log.d("currentDay : contained",currentDay + " : " + namesOfDays.contains(currentDay));
             if(namesOfDays != null && namesOfDays.contains(currentDay)) found = true;
-
+            
+            if(comparing) {
+            	final String compareCurrentDay = compare + "_" + months[Integer.parseInt(substring[1])-1] + "_" + substring[2] + "_" + substring[0];
+                if(compareNamesOfDays != null && compareNamesOfDays.contains(compareCurrentDay)) compareFound = true;
+            }
+            Log.d("CalendarAdapter ", position + " found: " + found + "\tcomparing: " + comparing + "\tcompareFound: " + compareFound);
+            
             // show icon if date is not empty and it exists in the items array
            ImageView iw = (ImageView) v.findViewById(R.id.date_icon);
+           ImageView ix = (ImageView) v.findViewById(R.id.date_iconB);
+           ImageView iy = (ImageView) v.findViewById(R.id.date_icons);
             if (date.length() > 0 && items != null && items.contains(date)) {
                 iw.setVisibility(View.VISIBLE);
-            } 
+                Log.d("CalendarAdapter", "Visible: date");
+            }
+            else if(found && compareFound) {
+            	iy.setVisibility(View.VISIBLE);
+                Log.d("CalendarAdapter", "Visible: iy");
+            }
             else if(found) {
             	iw.setVisibility(View.VISIBLE);
+                Log.d("CalendarAdapter", "Visible: iw");
+            }
+            else if(compareFound) {
+            	ix.setVisibility(View.VISIBLE);
+                Log.d("CalendarAdapter", "Visible: ix");
             }
             else {
+                Log.d("CalendarAdapter", "Visible: none");
                 iw.setVisibility(View.INVISIBLE);
+                ix.setVisibility(View.INVISIBLE);
+                iy.setVisibility(View.INVISIBLE);
             }
             found = false;
             return v;
@@ -197,6 +254,8 @@ public class CalendarAdapter extends BaseAdapter{
             // clear items
     		namesOfDays.clear();
     		daysInMonth.clear();
+    		compareNamesOfDays.clear();
+    		compareDaysInMonth.clear();
             items.clear();
             dayString.clear();
             Locale.setDefault(Locale.US);

@@ -9,10 +9,11 @@ import java.util.List;
 import java.util.Locale;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -48,6 +49,7 @@ public class MonthActivity extends Activity {
 	public static String EXTRA_MESSAGE = "bb.sxytm.freedum.MESSAGE";
 	public static final String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 	public static final int DIALOG = 0;
+	private int selectedFriend = 0;
 	
     public GregorianCalendar month, itemmonth;// calendar instances.
 
@@ -65,6 +67,7 @@ public class MonthActivity extends Activity {
 	int cYear = c.get(Calendar.YEAR);
 	int cMonth = c.get(Calendar.MONTH);
 	int cDay = c.get(Calendar.DAY_OF_MONTH);
+	String compare = null;
 	
     public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -73,14 +76,76 @@ public class MonthActivity extends Activity {
             Locale.setDefault(Locale.US);
 
     		final ParseUser currentUser = ParseUser.getCurrentUser();
-            
+    		Log.d("MonthActivity", "Current user: " + currentUser.getUsername());
+    		
+    		// Get person to compare to
+    		Intent compareIntent = getIntent();
+    		String compareMessage = compareIntent.getStringExtra(MonthActivity.EXTRA_MESSAGE);
+    		compare = compareMessage;
+    		Log.d("MonthActivity", "Compare user: " + compare);
+    		
+    		// Create new event for new user
+    		if(compareMessage=="*NEW_USER*") {
+    			ActionBar ab = getActionBar();
+    			ab.setTitle("Month + " + compare);
+				Log.d("MonthActivity", "New User");
+				Calendar c=Calendar.getInstance();
+				int year = c.get(Calendar.YEAR);
+				int month = c.get(Calendar.MONTH);
+				int day = c.get(Calendar.DAY_OF_MONTH);
+				int hour = c.get(Calendar.HOUR_OF_DAY);
+		  	  	int min = c.get(Calendar.MINUTE);
+			  	String time = hour + ":" + min;
+			  	String startMonth = months[month] + "_" + String.valueOf(year);
+				String startDay = months[month] + "_" +String.valueOf(day) + "_" +  String.valueOf(year);
+
+				// Put all event information in a JSON array
+				JSONObject event = new JSONObject();
+				Log.d("NAME", "Signed Up");
+				try {
+					event.put("name","Signed Up");
+				Log.d("FROM DATE", startDay);
+				event.put("fromDate",startDay);
+				Log.d("TO DATE", startDay);
+				event.put("toDate",startDay);
+				Log.d("TO TIME", time);
+				event.put("toTime",time);
+				Log.d("FROM TIME", time);
+				event.put("fromTime", time);
+
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				// Add username to front of startMonth and startDay
+				startMonth = currentUser.getUsername() + "_" + startMonth;
+				startDay = currentUser.getUsername() + "_" + startDay;
+				
+				// Save
+				ParseObject sMonth = new ParseObject(startMonth);
+				ParseObject sDay = new ParseObject(startDay);
+				sMonth.put(startMonth, startDay);
+				sMonth.saveInBackground();
+				sDay.put(startDay, event);
+				sDay.put("time", time);
+				try {
+					sDay.save();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    		}
+    		if(compareMessage!=null) showToast("Comparing with " + compareMessage);
+    		
+    		// Set layouts
             rLayout = (LinearLayout) findViewById(R.id.text);
             month = (GregorianCalendar) GregorianCalendar.getInstance();
             itemmonth = (GregorianCalendar) month.clone();
 
             items = new ArrayList<String>();
 
-            adapter = new CalendarAdapter(this, month);
+            adapter = new CalendarAdapter(this, month, compareMessage);
 
             GridView gridview = (GridView) findViewById(R.id.gridview);
             gridview.setAdapter(adapter);
@@ -93,6 +158,7 @@ public class MonthActivity extends Activity {
 
             RelativeLayout previous = (RelativeLayout) findViewById(R.id.previous);
             
+            // On previous click
             previous.setOnClickListener(new OnClickListener() {
 
                     @Override
@@ -102,6 +168,7 @@ public class MonthActivity extends Activity {
                     }
             });
 
+            // On next click
             RelativeLayout next = (RelativeLayout) findViewById(R.id.next);
             next.setOnClickListener(new OnClickListener() {
 
@@ -113,6 +180,7 @@ public class MonthActivity extends Activity {
                     }
             });
 
+            // On item click in calendar
             gridview.setOnItemClickListener(new OnItemClickListener() {
 					public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
@@ -147,7 +215,7 @@ public class MonthActivity extends Activity {
                                     }
                             }
                             
-                            // Get data from Parse
+                            // Get data from Parse and add to layout
                             String[] substring = selectedGridDate.split("-");
                             cMonth = Integer.parseInt(substring[1])-1;
                             cDay = Integer.parseInt(substring[2]);
@@ -183,7 +251,7 @@ public class MonthActivity extends Activity {
                                 	  TextView eventTextView = new TextView(MonthActivity.this);
 
                                 	  // set some properties of eventTextView
-                                	  eventTextView.setText("Event: " + event);
+                                	  eventTextView.setText("You: " + event);
                                 	  eventTextView.setTextColor(Color.BLACK);
                                 	  eventTextView.setBackgroundColor(0xFF00FF00);
                                 	  eventTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
@@ -195,7 +263,7 @@ public class MonthActivity extends Activity {
                                 	  TextView timeTextView = new TextView(MonthActivity.this);
                                 	  timeTextView.setText("\t\t" + fTime + " - " + tTime);
                                 	  timeTextView.setTextColor(Color.BLACK);
-                                	  timeTextView.setBackgroundColor(Color.parseColor("#FF00DD"));
+                                	  timeTextView.setBackgroundColor(0xFF00FF00);//Color.parseColor("#FF00DD"));
                                 	  timeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                                 	  rLayout.addView(timeTextView);
                                   }
@@ -205,6 +273,65 @@ public class MonthActivity extends Activity {
                               }
                             });
 
+                            // Get data from Parse for compare and add to layout
+                            if(compare != null && compare != "*NEW_USER*") {
+                            	final String compareCurrentDay = compare + "_" + months[cMonth] + "_" + cDay + "_" + cYear;
+                                Log.d("compareCurrentDay",compareCurrentDay);
+                                ParseQuery<ParseObject> queryC = ParseQuery.getQuery(currentDay);
+                                queryC = queryC.orderByAscending("time");
+                                queryC.findInBackground(new FindCallback<ParseObject>() {
+                                  public void done(List<ParseObject> objects, ParseException e) {
+                                    if (e == null) {
+                                    	desc = new ArrayList<String>();
+                                    	if(objects == null || objects.size() == 0) return;
+                                    	Log.d("compare objects.size", objects.size()+"");
+                                    	String event = "";
+                                    	String fTime = "";
+                                    	String tTime = "";
+                                      for(int i = 0; i < objects.size(); i ++) {
+                                    	  Log.d("i", i+"");
+                                    	  try {
+    										event = objects.get(i).getJSONObject(compareCurrentDay).getString("name");
+    										fTime = objects.get(i).getJSONObject(compareCurrentDay).getString("fromTime");
+    										tTime = objects.get(i).getJSONObject(compareCurrentDay).getString("toTime");
+    									} catch (JSONException e1) {
+    										// TODO Auto-generated catch block
+    										e1.printStackTrace();
+    									} catch(NullPointerException e2) {
+    										e2.printStackTrace();
+    									}
+                                    	  Log.d("added", event);
+                                    	  //desc.add(events);
+                                    	
+                                    	  Log.d("desc.size", desc.size()+"");
+                                    	  Log.d("Setting rowText 1", i+"");
+                                    	  TextView eventTextView = new TextView(MonthActivity.this);
+
+                                    	  // set some properties of eventTextView
+                                    	  eventTextView.setText(compare + ": " + event);
+                                    	  eventTextView.setTextColor(Color.BLACK);
+                                    	  eventTextView.setBackgroundColor(Color.parseColor("#FF00DD"));
+                                    	  eventTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+
+                                    	  // add the textview to the linearlayout	
+                                    	  rLayout.addView(eventTextView);
+                                    	  
+                                    	  // set some properties for timeTextView
+                                    	  TextView timeTextView = new TextView(MonthActivity.this);
+                                    	  timeTextView.setText("\t\t" + fTime + " - " + tTime);
+                                    	  timeTextView.setTextColor(Color.BLACK);
+                                    	  timeTextView.setBackgroundColor(Color.parseColor("#FF00DD"));
+                                    	  timeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                                    	  rLayout.addView(timeTextView);
+                                      }
+                                    } else {
+                                      // Failed
+                                    }
+                                  }
+                                });
+                            }
+                            
+                            // Get data from calendar and add to layout
                             Log.d("desc.size", desc.size()+"");
                             if (desc.size() > 0) {
                                     for (int i = 0; i < desc.size(); i++) {
@@ -231,6 +358,7 @@ public class MonthActivity extends Activity {
             
     }
 
+    // Move to next month
     protected void setNextMonth() {
             if (month.get(GregorianCalendar.MONTH) == month
                             .getActualMaximum(GregorianCalendar.MONTH)) {
@@ -243,6 +371,7 @@ public class MonthActivity extends Activity {
 
     }
 
+    // Move to previous month
     protected void setPreviousMonth() {
             if (month.get(GregorianCalendar.MONTH) == month
                             .getActualMinimum(GregorianCalendar.MONTH)) {
@@ -333,15 +462,23 @@ public class MonthActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
     	case R.id.monthNewEvent:
+    		Log.d("Action Bar", "Sending to new");
     		sendMessage(cMonth, cDay, cYear);
     		return true;
+    	case R.id.compareFriend:
+    		Log.d("Action Bar", "Sending to compare");
+    		compareFriend();
+    		return true;
     	case R.id.monthListView:
+    		Log.d("Action Bar", "Sending to list");
     		listView();
     		return true;
     	case R.id.newFriend:
+    		Log.d("Action Bar", "Sending to add");
     		addFriend();
     		return true;
     	case R.id.Logout:
+    		Log.d("Action Bar", "Sending to logout");
     		// If logout clicked, then logout :p
     		logout();
     		return true;
@@ -360,12 +497,72 @@ public class MonthActivity extends Activity {
     		startActivity(intent);
     	}
     	else {
-    		Context context = getApplicationContext();
-			CharSequence text = "SOMETHING MESSED UP! WE CAN'T LOG YOU OUT!! ";
-			int duration = Toast.LENGTH_SHORT;
-			Toast.makeText(context, text, duration).show();
+			showToast("SOMETHING MESSED UP! WE CAN'T LOG YOU OUT!! ");
     	}
     	finish();
+    }
+    
+    // Compare a friend by selecting a friend then relaunching activity
+	public void compareFriend() {
+    	Log.d("Compare Friends", "Starting creation");
+    	final ParseUser currentUser =  ParseUser.getCurrentUser();
+    	String foundUser = "";
+		final Intent intent = new Intent(this, MonthActivity.class);
+    	if(currentUser != null) {
+    		ParseRelation relation = currentUser.getRelation("Friends");
+    		ParseQuery query = relation.getQuery();
+    		query.whereEqualTo("username", null);
+    		try {
+				List<ParseObject> friends = query.find();
+				List<String> tFriends = new ArrayList<String>();
+				int i = 0;
+				if(!friends.isEmpty()) {
+					Log.d("Compare Friends", "size of friends: " + friends.size());
+					for(ParseObject f : friends) {
+						tFriends.add(f.getString("username").toString());
+						i++;
+						Log.d("Compare Friends", "Adding: " + f.getString("username").toString());
+					}
+				}
+				else tFriends.add("NO FRIENDS FOUND");
+				final CharSequence[] sFriends = tFriends.toArray(new CharSequence[tFriends.size()]);
+				for(CharSequence s : sFriends)	Log.d("Compare Friends", "sFriends: " + s);
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setTitle(R.string.select_friend);
+				builder.setSingleChoiceItems(sFriends, 0, new DialogInterface.OnClickListener() {
+						
+				    	   @Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+				    		   selectedFriend = which;
+							}
+				       })
+				       .setPositiveButton(R.string.compare_button, new DialogInterface.OnClickListener() {
+						
+				    	   @Override
+				    	   public void onClick(DialogInterface dialog, int which) {
+				    		   // TODO Auto-generated method stub
+				    	    	String message = sFriends[selectedFriend].toString();
+				    	    	intent.putExtra(EXTRA_MESSAGE, message);
+				    	    	startActivity(intent);
+				    	    	finish();
+				    	   }
+				       })
+				       .setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
+						
+				    	   @Override
+				    	   public void onClick(DialogInterface dialog, int which) {
+				    		   // TODO Auto-generated method stub
+				    	   }
+				       });
+				AlertDialog dialog = builder.create();
+				dialog.show();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				showToast("Error in finding your friends\nPlease try again later");
+				e.printStackTrace();
+			}
+    	}
     }
     
     // Add a new friend to the users friend list
@@ -427,20 +624,22 @@ public class MonthActivity extends Activity {
 		                                // TODO Auto-generated method stub
 		                                ParseRelation relation = currentUser.getRelation("Friends");
 		                                ParseQuery query = relation.getQuery();
-		                                query.whereEqualTo("username", null);
+		                   /*             query.whereEqualTo("username", username);
+		        						
+		        						List<ParseUser> user = new ArrayList<ParseUser>();
 		                                try {
-											query.find();
+											user = query.find();
 										} catch (ParseException e1) {
 											// TODO Auto-generated catch block
 
 											Toast.makeText(getApplicationContext(), "Saving . . .", Toast.LENGTH_SHORT).show();
 											e1.printStackTrace();
-											relation.add(friend);
+						*/					relation.add(friend);
 											currentUser.saveInBackground();
 											Toast.makeText(getApplicationContext(), username + " is now your friend", Toast.LENGTH_LONG).show();
 											d.dismiss();
-										}
-		                                Toast.makeText(getApplicationContext(), username + " is already a friend",Toast.LENGTH_LONG).show();
+						//				}
+		                //                Toast.makeText(getApplicationContext(), username + " is already a friend",Toast.LENGTH_LONG).show();
 		                            }
 		                        });
 		                    }

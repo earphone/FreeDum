@@ -182,6 +182,7 @@ public class NewEventActivity extends Activity {
 					JSONObject event = new JSONObject();
 					TextView etext = (TextView)findViewById(R.id.newEventName);
 					CharSequence text = etext.getText();
+					if(text == null) text = "Free";
 					Log.d("NAME", text.toString());
 					event.put("name",text.toString());
 					etext = (TextView)findViewById(R.id.newEventFromDate);
